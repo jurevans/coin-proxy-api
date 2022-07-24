@@ -1,4 +1,4 @@
-# fiatconversion-api
+# coin-cache-api
 
 This is a simple Rest API for caching fiat-conversion rates from a third-party API, and may potentially serve other useful data in the future. This API is built on Python, Flask, and Redis. Data from a third-party API are stored as a hashmap in Redis with a designated TTL. The client can either use the timestamp of the original third-party request for each token and currency, or the timestamp of the request to this API to determine a sane time to refetch results. Each token and currency combination is requested and cached individually.
 
