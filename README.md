@@ -184,5 +184,6 @@ The value for the `/expires` key, e.g., `BTC/USD/expires`, is set to TTL it was 
 
 - Use the same format and type for timestamps.
 - Any error responses from the third-party API should be passed on to the client for handling.
+- Add SimpleCache or Memcached for any non-Redis-cached routes
 
 [ [Table of Contents](#table-of-contents) ]

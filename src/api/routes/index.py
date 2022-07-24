@@ -6,5 +6,5 @@ from . import routes
 @auth_required
 def index():
     return jsonify({
-        'message': 'index'
+        'version': '1.0.1'
     }), 200

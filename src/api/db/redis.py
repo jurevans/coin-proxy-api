@@ -12,4 +12,9 @@ def get_redis():
 def redis_available():
     redis_client = get_redis()
     info = redis_client.info()
-    return True, 'redis ok'
+
+    return True, {
+        'status': 'redis ok',
+        'uptime_days': info['uptime_in_days'],
+        'uptime_seconds': info['uptime_in_seconds']
+    }
