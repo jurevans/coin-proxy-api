@@ -90,10 +90,10 @@ _NOTE_ You can specify `coin` or `coins`, `currency` or `currencies` as the `GET
 _NOTE_ `POST` requests can also be sent as JSON data, passing `coins` and/or `currencies` as JSON parameters. Passing no arguments in a `POST` or `GET` will return the API default values.
 
 ```bash
-curl --request POST http://127.0.0.1:5000/rates --header "X-Api-Key:MY_SECRET_API_KEY" --data "coins=BTC,EUR&currencies=USD,EUR,YEN"
+curl --request POST http://127.0.0.1:5000/api/v1/rates --header "X-Api-Key:MY_SECRET_API_KEY" --data "coins=BTC,EUR&currencies=USD,EUR,YEN"
 
 # Optionally, pipe it through jq for formatting JSON
-curl --request POST http://127.0.0.1:5000/rates --header "X-Api-Key:MY_SECRET_API_KEY" --data "coins=BTC,EUR&currencies=USD,EUR,YEN" | jq
+curl --request POST http://127.0.0.1:5000/api/v1/rates --header "X-Api-Key:MY_SECRET_API_KEY" --data "coins=BTC,EUR&currencies=USD,EUR,YEN" | jq
 ```
 
 **SAMPLE OUTPUT**
