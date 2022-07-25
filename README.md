@@ -54,7 +54,7 @@ THIRD_PARTY_KEY="xxxxxx-xxxx-xxxxxx-xxxxxxxxx-xxxxxxxx"
 EXCHANGE_RATE_API="https://rest.coinapi.io/v1/exchangerate"
 
 # TTL for cached API queries (third-party), defaults to 7200 (2 hours) - OPTIONAL
-TTL = 3600
+TTL=3600
 ```
 
 Additionally, see `DEFAULTS` in `api/config/default.py` for setting default tokens, currencies, etc.
@@ -64,7 +64,7 @@ Additionally, see `DEFAULTS` in `api/config/default.py` for setting default toke
 ## Running the development server
 
 ```bash
-export FLASK_APP=src/api
+export FLASK_APP=server/api
 
 flask run
 # Your server will be available at http://127.0.0.1:5000/
