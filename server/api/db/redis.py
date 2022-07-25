@@ -1,5 +1,5 @@
 from flask import g
-from api.config import Config
+from api.config.default import Config
 from redis import Redis
 
 def get_redis():

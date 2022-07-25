@@ -5,8 +5,9 @@ This is a simple Rest API for caching fiat-conversion rates from a third-party A
 ## Table of Contents
 
 - [Installation](#installation)
-- [Running the development server](#running-the-development-server)
 - [Environment Configuration](#environment-configuration)
+- [Running the development server](#running-the-development-server)
+- [Using with docker-compose](#using-with-docker-compose)
 - [Endpoints](#endpoints)
 - [Notes](#notes)
 - [TODO](#todo)
@@ -26,22 +27,9 @@ pip install -r requirements.txt
 
 [ [Table of Contents](#table-of-contents) ]
 
-## Running the development server
-
-```bash
-export FLASK_APP=src/api
-
-flask run
-# Your server will be available at http://127.0.0.1:5000/
-# Make sure to send requests with the x-api-key header value which
-# matches the key in your .env file
-```
-
-[ [Table of Contents](#table-of-contents) ]
-
 ## Environment Configuration
 
-Create a `.env` file with the following keys defined:
+Create a `.env` file (in the base project directory) with the following keys defined:
 
 ```bash
 # Key used by x-api-key header to authorize protected routes - REQUIRED
@@ -69,7 +57,37 @@ EXCHANGE_RATE_API="https://rest.coinapi.io/v1/exchangerate"
 TTL = 3600
 ```
 
-Additionally, see `DEFAULTS` in `config.py` for setting default tokens, currencies, etc.
+Additionally, see `DEFAULTS` in `api/config/default.py` for setting default tokens, currencies, etc.
+
+[ [Table of Contents](#table-of-contents) ]
+
+## Running the development server
+
+```bash
+export FLASK_APP=src/api
+
+flask run
+# Your server will be available at http://127.0.0.1:5000/
+# Make sure to send requests with the x-api-key header value which
+# matches the key in your .env file
+```
+
+[ [Table of Contents](#table-of-contents) ]
+
+## Using with docker-compose
+
+In the project directory (`coin-cache-api`), run the following:
+
+```bash
+docker-compose build
+docker-compose up -d
+```
+
+Check that the containers are up and running:
+
+```bash
+docker-compose ps
+```
 
 [ [Table of Contents](#table-of-contents) ]
 
@@ -136,7 +154,7 @@ curl --request POST http://127.0.0.1:5000/api/v1/rates --header "X-Api-Key:MY_SE
 }
 ```
 
-_NOTE_ In this example, no conversion rates were found for `YEN`, which results in an empty JSON object. Empty results are not cached, and will be refetched on the next request.
+_NOTE_ In this example, no conversion rates were found for `YEN` (the correct currency value would be `JPY`), which results in an empty JSON object. Empty results are not cached, and will be refetched on the next request.
 
 [ [Table of Contents](#table-of-contents) ]
 
@@ -184,6 +202,6 @@ The value for the `/expires` key, e.g., `BTC/USD/expires`, is set to TTL it was 
 
 - Use the same format and type for timestamps.
 - Any error responses from the third-party API should be passed on to the client for handling.
-- Add SimpleCache or Memcached for any non-Redis-cached routes
+- Implement caching on all routes, not just `/api/v1/rates`, where applicable
 
 [ [Table of Contents](#table-of-contents) ]

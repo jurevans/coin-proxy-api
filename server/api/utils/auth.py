@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_httpauth import HTTPTokenAuth
 from functools import wraps
-from api.config import Config
+from api.config.default import Config
 
 config = Config()
 auth = HTTPTokenAuth(header={ 'X-API-Key': config.API_KEY } )

@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  redis:
+    image: redis:buster
+
+  api:
+    build:
+      context: ./server/
+    ports:
+      - "8000:8000"
+    links:
+      - redis
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    links:
+      - api

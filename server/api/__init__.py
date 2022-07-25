@@ -1,9 +1,9 @@
-# /api/
+# /api
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from redis import Redis
-from api.config import Config
+from api.config.default import Config
 from api.routes import *
 import requests
 
