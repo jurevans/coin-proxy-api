@@ -66,6 +66,9 @@ Additionally, see `DEFAULTS` in `api/config/default.py` for setting default toke
 ```bash
 export FLASK_APP=server/api
 
+# Optionally enable debugger:
+export FLASK_DEBUG=true
+
 flask run
 # Your server will be available at http://127.0.0.1:5000/
 # Make sure to send requests with the x-api-key header value which
@@ -103,7 +106,7 @@ docker-compose ps
 
 **POST** Example with cURL
 
-_NOTE_ You can specify `coin` or `coins`, `currency` or `currencies` as the `GET` request parameters with similar effect.
+_NOTE_ You can specify `coin` or `coins`, `currency` or `currencies` as the `GET` request parameters with identical results.
 
 _NOTE_ `POST` requests can also be sent as JSON data, passing `coins` and/or `currencies` as JSON parameters. Passing no arguments in a `POST` or `GET` will return the API default values.
 
@@ -114,9 +117,8 @@ curl --request POST http://127.0.0.1:5000/api/v1/rates --header "X-Api-Key:MY_SE
 curl --request POST http://127.0.0.1:5000/api/v1/rates --header "X-Api-Key:MY_SECRET_API_KEY" --data "coins=BTC,EUR&currencies=USD,EUR,YEN" | jq
 ```
 
-**SAMPLE OUTPUT**
-
 ```json
+/* Sample response */
 {
   "data": {
     "BTC": {
@@ -169,7 +171,7 @@ redis-cli
 If authentication is required, enter the proper password (as defined in `.env`):
 
 ```bash
-AUTH <my-secret-redis-password>
+auth <my-secret-redis-password>
 ```
 
 Inspecting the stored keys following a request, you may see something like the following:
