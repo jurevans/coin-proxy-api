@@ -1,6 +1,6 @@
 # coin-proxy-api
 
-This is a simple proxy API for caching fiat-conversion rates from a third-party API, and may potentially serve other useful data in the future. This API is built on Python, Flask, and Redis. Data from a third-party API are stored as a hashmap in Redis with a designated TTL. The client can either use the timestamp of the original third-party request for each token and currency, or the timestamp of the request to this API to determine a sane time to refetch results. Each token and currency combination is requested and cached individually.
+This is a simple proxy API for caching and providing a common interface to third-party APIs to provide crypto coin-related data, e.g., fiat conversion rates, etc. This API is built on Python, Flask, and Redis. Data from third-party APIs are stored as a hashmap in Redis with a designated TTL.
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@ python3 -m venv venv
 . venv/bin/activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r server/requirements.txt
 ```
 
 [ [Table of Contents](#table-of-contents) ]
@@ -53,8 +53,8 @@ THIRD_PARTY_KEY="xxxxxx-xxxx-xxxxxx-xxxxxxxxx-xxxxxxxx"
 # Exchange Rate API URL - OPTIONAL
 EXCHANGE_RATE_API="https://rest.coinapi.io/v1/exchangerate"
 
-# TTL for cached API queries (third-party), defaults to 7200 (2 hours) - OPTIONAL
-TTL=3600
+# TTL for cached API queries (third-party), defaults to an aggressive 7200 (2 hours) - OPTIONAL
+TTL=60
 ```
 
 Additionally, see `DEFAULTS` in `api/config/default.py` for setting default tokens, currencies, etc.
@@ -205,5 +205,8 @@ The value for the `/expires` key, e.g., `BTC/USD/expires`, is set to TTL it was 
 - Use the same format and type for timestamps.
 - Any error responses from the third-party API should be passed on to the client for handling.
 - Implement caching on all routes, not just `/api/v1/rates`, where applicable
+- Port to CoinGecko API (removing coinapi.io), and add additional routes for handling coin details
+- Validate and pass through requests that match the target API but fall outside of the standardized routes, and cache those responses separately (by the `GET` query string parameters, for example)
+- Implement API versioning in a more logical way, and support versions for third-party API
 
 [ [Table of Contents](#table-of-contents) ]

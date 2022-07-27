@@ -1,7 +1,12 @@
 # /api/routes
 
 from flask import Blueprint
-routes = Blueprint('routes', __name__)
+
+API_PREFIX = '/api/v1'
+routes = Blueprint('routes', __name__, url_prefix=API_PREFIX)
+
+from .coingecko import coingecko
+routes.register_blueprint(coingecko)
 
 from .index import *
 from .rates import *

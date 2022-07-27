@@ -7,7 +7,9 @@ load_dotenv(find_dotenv())
 TTL_TWO_HOURS = 7200
 DEFAULT_TOKENS = ['BTC', 'ATOM', 'ETH', 'DOT']
 DEFAULT_CURRENCIES = ['USD', 'EUR']
-EXCHANGE_RATE_API = "https://rest.coinapi.io/v1/exchangerate"
+# EXCHANGE_RATE_API = "https://rest.coinapi.io/v1/exchangerate"
+
+THIRD_PARTY_API_URL = 'https://api.coingecko.com/api/v3'
 
 class Config(object):
     def __init__(self):
@@ -20,5 +22,5 @@ class Config(object):
         self.REDIS_PASSWORD=os.environ.get('REDIS_PASSWORD')
         self.REDIS_DB=os.environ.get('REDIS_DB') or 0
         self.THIRD_PARTY_KEY = os.environ.get('THIRD_PARTY_KEY')
-        self.EXCHANGE_RATE_API = os.environ.get('EXCHANGE_RATE_API') or EXCHANGE_RATE_API
+        self.THIRD_PARTY_API_URL = os.environ.get('THIRD_PARTY_API_URL') or THIRD_PARTY_API_URL
         self.TTL = int(os.environ.get('TTL')) or TTL_TWO_HOURS
