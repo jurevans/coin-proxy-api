@@ -1,4 +1,4 @@
-from api.config import Config
+from api.config.default import Config
 from datetime import datetime
 import requests
 

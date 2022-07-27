@@ -7,7 +7,7 @@ envdump = EnvironmentDump()
 
 def application_data():
     return {'maintainer': 'Justin R. Evans',
-            'git_repo': 'https://github.com/jurevans/fiatconversion-api'}
+            'git_repo': 'https://github.com/jurevans/coin-cache-api'}
 
 envdump.add_section('application', application_data)
 
